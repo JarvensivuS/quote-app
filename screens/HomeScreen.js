@@ -10,7 +10,7 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import { auth, firestore, collection, addDoc } from '../firebase/Config';
+import { auth, firestore, collection, addDoc, } from '../firebase/Config';
 import Login from './Login';
 import CustomButton from '../CustomButton';
 
@@ -90,11 +90,6 @@ function HomeScreen({ logged, setLogged }) {
       setQuote('Error fetching quote');
     }
   };
-
-  navigation.setOptions({
-    title: 'Home',
-    headerShown: true,
-  });
 
   const addQuoteToFirestore = async (quote) => {
     try {

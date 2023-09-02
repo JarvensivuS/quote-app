@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, TextInput, View, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, TextInput, View, SafeAreaView,Alert } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import CustomButton from '../CustomButton';
 import { useNavigation } from '@react-navigation/native';
@@ -8,25 +8,24 @@ export default function Login({ setLogin }) {
   const navigation = useNavigation();
   const [userName, setUsername] = useState('test1@foo.com');
   const [password, setPassword] = useState('test1234');
-
-  navigation.setOptions({
-    title: 'Login',
-    headerShown: false,
-  });
-
   const login = () => {
+    
     const auth = getAuth();
     signInWithEmailAndPassword(auth, userName, password)
       .then((userCredential) => {
         console.log(userCredential.user);
         setLogin(true);
+        navigation.navigate('Home');
       })
       .catch((error) => {
         if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+          Alert.alert('Invalid credentials');
           console.log('Invalid credentials');
         } else if (error.code === 'auth/too-many-requests') {
+          Alert.alert('Too many attempts to login');
           console.log('Too many attempts to login');
         } else {
+          Alert.alert(error.code + ' ' + error.message);
           console.log(error.code + ' ' + error.message);
         }
       });
