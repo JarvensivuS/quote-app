@@ -7,3 +7,10 @@ App uses firebase for user authentication and firestore database for storing the
 Test username: test1@foo.com
 Test password: test1234
 Also visible on login screen so should not have need to type but just in case.
+
+Expo Go used for testing the app, web version has inconsistencies.
+
+to run app:
+npm install
+npm start 
+scan QR on expo go on android or use camera app if using ios.
