@@ -96,17 +96,6 @@ function HomeScreen({ logged, setLogged }) {
     headerShown: true,
   });
 
-
-  const handleLogout = async () => {
-    try {
-      await auth.signOut();
-      setLogged(false);
-      console.log('User logged out successfully');
-    } catch (error) {
-      console.error('Error logging out:', error);
-    }
-  };
-
   const addQuoteToFirestore = async (quote) => {
     try {
       const user = auth.currentUser;
